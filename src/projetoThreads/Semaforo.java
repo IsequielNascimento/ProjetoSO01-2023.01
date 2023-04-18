@@ -1,4 +1,4 @@
-package crianca_Brincadeira;
+package projetoThreads;
 
 import java.util.concurrent.Semaphore;
 
@@ -9,6 +9,6 @@ public class Semaforo {
 
     public static Semaphore cestoVazio = new Semaphore(0); // Cesto vazio
 
-    public static Semaphore mutex = new Semaphore(1);
+    public static Semaphore mutex = new Semaphore(1); 
 
 }
