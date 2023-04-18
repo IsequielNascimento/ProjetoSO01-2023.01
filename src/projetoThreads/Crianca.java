@@ -29,7 +29,7 @@ public class Crianca extends Thread {
         Thread.sleep(tempoQuieta);
     }
 
-
+    // Teste
 
     public static void main(String[] args){
         Crianca teste = new Crianca();
