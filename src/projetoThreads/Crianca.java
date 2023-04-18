@@ -29,10 +29,18 @@ public class Crianca extends Thread {
         Thread.sleep(tempoQuieta);
     }
 
-    // Teste
+    public void pegarBola() throws InterruptedException{
+        System.out.println("A"+nome+ "vai pegar uma bola");
+        Semaforo cesto = new Semaforo();
+        cesto.cestoLim.acquire();
+        System.out.println("A criança pegou a bola");
+        //mutex iria para 0 porque dessa forma nenhuma criança pega no cesto
+        temBola = true;
+        //mutex iria para 1 porque assim outra criança pega a bola no cesto
+    }
 
     public static void main(String[] args){
-        Crianca teste = new Crianca();
+
         teste.start();
     }
 
