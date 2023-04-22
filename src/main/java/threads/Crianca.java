@@ -1,5 +1,13 @@
-package projetoThreads;
+//A classe Crianca.Java é a classe principal de controle das crianças que irão brincar com a bola
+
+package threads;
+import gui.resources.CriancaConcrete;
+
+
 import java.util.concurrent.Semaphore;
+
+// javax.swing is a package that contains classes for creating graphical user interfaces
+import javax.swing.*;
 
 public class Crianca extends Thread {
 
@@ -40,7 +48,19 @@ public class Crianca extends Thread {
     }
 
     public static void main(String[] args){
+        //javax.swing.SwingUtilities is a class that contains static methods for creating and managing top-level windows
+        SwingUtilities.invokeLater(()->{
+
+                //CriancaForm is a class that represents a window
+               CriancaConcrete brincar = new CriancaConcrete();
+               //inicializar is a method that initializes the window
+               brincar.setVisible(true);
+
+        });
         System.out.println("Olá mundo");
+    }
+
+    private void setVisible(boolean b) {
     }
 
 }
