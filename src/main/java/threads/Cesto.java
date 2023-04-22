@@ -1,4 +1,4 @@
-package projetoThreads;
+package threads;
 
 public class Cesto{
 
