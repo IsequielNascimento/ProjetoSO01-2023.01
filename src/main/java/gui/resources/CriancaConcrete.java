@@ -6,8 +6,11 @@ import java.util.List;
 
 public class CriancaConcrete extends CriancaForm{
 
+    // Lista de crianças que será usada para iniciar a brincadeira
     private List<Crianca> criancas = new ArrayList<Crianca>();
 
+
+    // Construtor da classe CriancaConcrete que recebe como parâmetro o nome da criança e se ela tem bola ou não (true ou false) e o tempo de brincadeira e de quieta da criança
     @Override
     public void btnCriarCriancaCLick(ActionEvent event) {
        criancas.add(new Crianca(nomeTextField.getText(), checkBoxBola.isSelected(), Integer.parseInt(textFieldTempoBrincadeira.getText()), Integer.parseInt(textFieldTempoQuieta.getText())));
@@ -23,15 +26,18 @@ public class CriancaConcrete extends CriancaForm{
         //System.out.println(Crianca.totalCrianca);
     }
 
+    
     @Override
     protected void btnCestoCLick(ActionEvent event) {
 
     }
 
+    // Método que inicia a brincadeira das crianças
     @Override
     protected void btnBrincarCLick(ActionEvent event) {
 
 
+        // Inicia a brincadeira das crianças
         Crianca.criancas = criancas;
         Crianca.criancas.forEach(Crianca::start);
 

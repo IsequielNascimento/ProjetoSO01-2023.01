@@ -35,6 +35,7 @@ public class Crianca extends Thread {
 
 
 
+    //Método que inicia a brincadeira das crianças. OBS: O método é temporário para testes
     public void run(){
 
         try{
