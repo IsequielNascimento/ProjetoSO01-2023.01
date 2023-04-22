@@ -2,6 +2,8 @@ package gui.resources;
 // javax.swing is a package that contains classes for creating graphical user interfaces
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 //JFrame is a class that represents a window
 public abstract class CriancaForm extends JFrame{
@@ -38,7 +40,9 @@ public abstract class CriancaForm extends JFrame{
 
     //CriancaForm is a class that represents a window
     public CriancaForm(){
+
         this.inicializar();
+        this.eventos();
     }
 
     //inicializar is a method that initializes the window
@@ -63,6 +67,19 @@ public abstract class CriancaForm extends JFrame{
         //pack is a method that sizes the window to fit the preferred size and layouts of its subcomponents
         this.pack();
     }
+
+    //Creating methods events for the buttons
+    protected abstract void btnCriarCriancaCLick(ActionEvent event);
+    protected abstract void btnCestoCLick(ActionEvent event);
+    protected abstract void btnBrincarCLick(ActionEvent event);
+
+
+    //eventos is a method that creates the events for the buttons
+    private void eventos(){
+
+        btnCriarCrianca.addActionListener(this::btnCriarCriancaCLick);
+        btnBrincar.addActionListener(this::btnBrincarCLick);
+        btnCesto.addActionListener(this::btnCestoCLick);}
 
     public JPanel getFormPanel() {
         if (formPanel == null) {
