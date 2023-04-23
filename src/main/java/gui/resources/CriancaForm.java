@@ -75,12 +75,13 @@ public abstract class CriancaForm extends JFrame{
 
 
     //eventos is a method that creates the events for the buttons
-    private void eventos(){
+    private void eventos() {
 
         btnCriarCrianca.addActionListener(this::btnCriarCriancaCLick);
-        btnBrincar.addActionListener(this::btnBrincarCLick);
-        btnCesto.addActionListener(this::btnCestoCLick);}
 
+        btnCesto.addActionListener(this::btnCestoCLick);
+        btnBrincar.addActionListener(this::btnBrincarCLick);
+    }
     public JPanel getFormPanel() {
         if (formPanel == null) {
             formPanel = new JPanel( new GridLayout(4, 2));

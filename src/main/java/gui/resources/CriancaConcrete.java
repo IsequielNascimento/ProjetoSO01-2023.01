@@ -6,8 +6,9 @@ import java.util.List;
 
 public class CriancaConcrete extends CriancaForm{
 
+    int interfaceCesto = 1;
     // Lista de crianças que será usada para iniciar a brincadeira
-    private List<Crianca> criancas = new ArrayList<Crianca>();
+    public List<Crianca> criancas = new ArrayList<Crianca>();
 
 
     // Construtor da classe CriancaConcrete que recebe como parâmetro o nome da criança e se ela tem bola ou não (true ou false) e o tempo de brincadeira e de quieta da criança
@@ -29,6 +30,13 @@ public class CriancaConcrete extends CriancaForm{
     
     @Override
     protected void btnCestoCLick(ActionEvent event) {
+       if (interfaceCesto == 1){
+           CestoConcrete cesto = new CestoConcrete();
+           interfaceCesto --;
+       }
+       else {
+           System.out.println("Já existe uma interface de cesto");
+       }
 
     }
 
