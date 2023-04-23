@@ -1,12 +1,14 @@
-package gui.resources;
+package gui.resources.animacao;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
 
-public class Principal {
+public class Principal extends CriancaAnimacao {
     public static JFrame janela;
 
     public static BackgroundPanel bp;
+
+
 
     public static void main(String[] args) {
         janela = new JFrame("Teste");
@@ -15,15 +17,9 @@ public class Principal {
         janela.setLocationRelativeTo(null);
         janela.setResizable(false);
 
-
         bp = new BackgroundPanel("src/main/java/gui/resources/assets/quadra.jpg");
-
         janela.add(bp);
-
 
         janela.setVisible(true);
     }
-
-
-
 }

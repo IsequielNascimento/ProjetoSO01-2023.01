@@ -1,17 +1,18 @@
-package gui.resources;
-
+package gui.resources.animacao;
+import gui.resources.animacao.Principal;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 
 public class CriancaAnimacao extends JPanel implements ActionListener {
 
     private Timer timer;
     private int x = 0;
-    private int y = 0;
+    private int y = 250;
     private int deltaX = 5;
     private Image image;
-    private int panelWidth = 400;
+    private int panelWidth;
     private int panelHeight;
 
     public CriancaAnimacao() {
@@ -21,6 +22,8 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
         // Configura o temporizador para atualizar a posição da imagem
         timer = new Timer(50, this);
         timer.start();
+
+
     }
 
     @Override
@@ -28,6 +31,10 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
+
+        // Desenha a imagem de fundo
+        Image bp = new ImageIcon("src/main/java/gui/resources/assets/quadra.jpg").getImage();
+        g2d.drawImage(bp, 0, 0, getWidth(), getHeight(), null);
 
         // Desenha a imagem na posição atual
         g2d.drawImage(image, x, y, null);
@@ -39,12 +46,12 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
         x += deltaX;
 
         // Verifica se a imagem ultrapassou o limite direito do painel
-        if (x + image.getWidth(null) > getWidth() / 2) {
+        if (x + image.getWidth(null) > getWidth() / 2 -50) {
             // Inverte a direção do movimento da imagem
             deltaX = -deltaX;
             image = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca1LadoE1.png").getImage();
             // Reposiciona a imagem para o meio do painel
-            x = (getWidth() / 2 -25) - image.getWidth(null);
+            x = (getWidth() / 2 -50) - image.getWidth(null);
         }
 
         // Verifica se a imagem ultrapassou o limite esquerdo do painel
@@ -63,10 +70,12 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Animated Image");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
+        frame.setSize(600, 350);
 
-        CriancaAnimacao panel = new CriancaAnimacao();
-        frame.add(panel);
+        // Adiciona o painel ao frame
+        frame.add(new CriancaAnimacao());
+
+
 
         frame.setVisible(true);
     }

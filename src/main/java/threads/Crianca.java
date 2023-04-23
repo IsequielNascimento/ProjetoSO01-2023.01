@@ -1,4 +1,4 @@
-//A classe Crianca.Java é a classe principal de controle das crianças que irão brincar com a bola
+//A classe Crianca. Java é a classe principal de controle das crianças que irão brincar com a bola
 
 package threads;
 import gui.resources.CriancaConcrete;
