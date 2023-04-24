@@ -8,6 +8,8 @@ import java.awt.event.*;
 public class CriancaAnimacao extends JPanel implements ActionListener {
 
     private Timer timer;
+
+    private int numCrianca = 2;
     private int x = 100;
     private int y = 500;
     private int deltaX = 5;
@@ -22,7 +24,7 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
 
     public CriancaAnimacao() {
         // Carrega a imagem
-        image = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca1LadoD1.png").getImage();
+        image = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca"+numCrianca+"LadoD1.png").getImage();
 
         cesto = new ImageIcon("src/main/java/gui/resources/assets/cesto/cesto5.png").getImage();
         // Configura o temporizador para atualizar a posição da imagem
@@ -58,7 +60,7 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
         if (x + image.getWidth(null) > getWidth() / 2 -50) {
             // Inverte a direção do movimento da imagem
             deltaX = -deltaX;
-            image = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca1LadoE1.png").getImage();
+            image = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca"+numCrianca+"LadoE1.png").getImage();
             // Reposiciona a imagem para o meio do painel
             x = (getWidth() / 2 -50) - image.getWidth(null);
         }
@@ -67,7 +69,7 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
         if (x < 100) {
             // Inverte a direção do movimento da imagem
             deltaX = -deltaX;
-            image = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca1LadoD1.png").getImage();
+            image = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca"+numCrianca+"LadoD1.png").getImage();
             // Reposiciona a imagem para a borda esquerda do painel
             x = 100;
         }
