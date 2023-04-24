@@ -1,5 +1,7 @@
 package gui.resources.animacao;
 
+import gui.resources.CestoForm;
+import threads.Cesto;
 import threads.Crianca;
 
 import javax.swing.*;
@@ -9,12 +11,15 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
+import static threads.Crianca.*;
+
 public class CriancaAnimacao extends JPanel implements ActionListener {
 
-    private Timer timer;
+    public static Timer timer;
+    protected JFrame frame;
 
-
-    private int numCrianca = 2;
+    private static int numCrianca = 1;
+    public int brincar = 0;
     private int x = 100;
     private int y = 400;
     private int panelY = 150;
@@ -22,7 +27,9 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
 
     private int panelWidth;
     private int panelHeight;
-    private Image image;
+    private static Image image;
+
+
     private Image cestoImage;
     private static Semaphore cesto;
 
@@ -33,18 +40,22 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
 
     public void adicionarCrianca(Crianca crianca) {
         criancas.add(crianca);
+        if (numCrianca == 3) {
+            numCrianca--;
+        } else
+            numCrianca++;
     }
 
     public CriancaAnimacao() {
         // Carrega a imagem
-        image = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca"+numCrianca+"LadoD1.png").getImage();
 
-        cestoImage = new ImageIcon("src/main/java/gui/resources/assets/cesto/cesto5.png").getImage();
+            image = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca" + numCrianca + "LadoD1.png").getImage();
+            cestoImage = new ImageIcon("src/main/java/gui/resources/assets/cesto/cesto5.png").getImage();
         // Configura o temporizador para atualizar a posição da imagem
+
+
         timer = new Timer(25, this);
         timer.start();
-
-
     }
 
 
@@ -59,10 +70,13 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
         g2d.drawImage(bp, 0, 0, getWidth(), getHeight(), null);
 
         for (Crianca crianca : criancas) {
-            g2d.drawImage(image, x, y,newWidth,newHeight, null);
+            for (int i = 0; i < criancas.size(); i++) {
+
+                    g2d.drawImage(image, x + (i * 40), y, newWidth, newHeight, null);
+            }
         }
 
-        g2d.drawImage(cestoImage, getWidth() / 2 -50, y, newWidth, newHeight, null);
+        g2d.drawImage(cestoImage, getWidth() / 2 - 50, y, newWidth, newHeight, null);
 
         // Desenha a imagem na posição atual
 
@@ -94,55 +108,6 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
         // Redesenha o painel com a nova posição da imagem
         repaint();
     }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Animated Image");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        frame.setSize(1200, 700);
-
-        // Cria o painel principal que envolve a animação
-        JPanel criancaAnimacao = new CriancaAnimacao();
-        //criancaAnimacao.setMaximumSize(new Dimension(1200, 700));
-
-        // Cria os dois novos painéis
-        // Painel Log
-        JPanel logCrianca = new LogCrianca();
-        logCrianca.setBackground(Color.RED);
-
-        // Painel Inserir Criança
-        JPanel criarCriancaPanel = new CriarCriancaPanel() {
-            public java.util.List<Crianca> criancas = new ArrayList<Crianca>();
-            //Funcionalidade do botão Criar Criança
-            @Override
-            protected void btnCriarCriancaCLick(ActionEvent event) {
-                //Cria uma nova criança
-                //Crianca crianca = new Crianca(nomeTextField.getText(), checkBoxBola.isSelected(), Integer.parseInt(textFieldTempoBrincadeira.getText()), Integer.parseInt(textFieldTempoQuieta.getText()));
-                //Adiciona a criança na lista de crianças
-                //criancas.add(crianca);
-                //Inicia a thread da criança
-                Crianca novaCrianca = new Crianca(nomeTextField.getText(), checkBoxBola.isSelected(), Integer.parseInt(textFieldTempoBrincadeira.getText()), Integer.parseInt(textFieldTempoQuieta.getText()));
-                ((CriancaAnimacao)criancaAnimacao).adicionarCrianca(novaCrianca);
-                novaCrianca.start();
-
-
-            }
-        };
-        criarCriancaPanel.setBackground(Color.BLUE);
-
-        // Cria um novo painel que conterá os dois novos painéis
-        JPanel painelInferior = new JPanel();
-        painelInferior.setLayout(new GridLayout(1, 2));
-
-        painelInferior.add(logCrianca);
-        painelInferior.add(criarCriancaPanel);
-        painelInferior.setSize(1200, 200);
-        // Adiciona o painel existente acima do novo painel
-        frame.add(criancaAnimacao, BorderLayout.CENTER);
-        // Adiciona o novo painel abaixo do painel existente
-        frame.add(painelInferior, BorderLayout.SOUTH);
-
-        frame.setVisible(true);
-    }
-
 }
+
+

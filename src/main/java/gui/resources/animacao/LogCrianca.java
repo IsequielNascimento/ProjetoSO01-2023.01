@@ -10,7 +10,7 @@ public class LogCrianca extends JPanel {
 
     public LogCrianca() {
         setLayout(new BorderLayout());
-        setMinimumSize(new Dimension(400, 200));
+        setMinimumSize(new Dimension(300, 200));
 
         // Cria JTextArea e adiciona ao JScrollPane
         textArea = new JTextArea();

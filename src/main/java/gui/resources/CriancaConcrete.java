@@ -12,6 +12,7 @@ import java.util.List;
 public class CriancaConcrete extends CriancaForm{
 
     int interfaceCesto = 1;
+    boolean brincar;
     public int criancaComBola = 1;
     public int criancaSemBola = 2;
     public int totalCriancas =0;
@@ -59,30 +60,24 @@ public class CriancaConcrete extends CriancaForm{
     // Método que inicia a brincadeira das crianças
     @Override
     protected void btnBrincarCLick(ActionEvent event) {
-        if (interfaceAnimacao == 1){
-          new CriancaAnimacao();
-            interfaceAnimacao --;
-
-            // Inicia a brincadeira das crianças
-            Crianca.criancas = criancas;
-            Crianca.criancas.forEach(Crianca::start);
-        }
-        else {
-            System.out.println("Já existe uma interface de animação");
-        }
-        if (criancas.size() == 0){
-            System.out.println("Não há crianças para brincar");
-        }
-        else {
-            System.out.println("Brincando");
-        }
-        if (Cesto.K == 0){
+        if (Cesto.K == 0) {
             System.out.println("Não foi definido a capacidade do cesto");
-        }
-        else {
-            System.out.println("A capacidade do cesto é de: " + Cesto.K);
-        }
+            if (criancas.size() == 0) {
+                System.out.println("Não há crianças para brincar");
+            }
+            if (interfaceAnimacao == 1) {
+                new CriancaAnimacao();
+                interfaceAnimacao--;
 
+                // Inicia a brincadeira das crianças
+                Crianca.criancas = criancas;
+                brincar = true;
+                Crianca.criancas.forEach(Crianca::start);
+            } else {
+                System.out.println("Já existe uma interface de animação");
+            }
+
+        }
 
     }
 }

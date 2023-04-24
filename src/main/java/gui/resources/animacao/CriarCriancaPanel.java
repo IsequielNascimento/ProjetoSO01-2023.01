@@ -11,6 +11,8 @@ public abstract class CriarCriancaPanel extends JPanel {
     private JPanel formPanel;
     private JPanel buttonPanel;
     protected JButton btnCriarCrianca;
+    protected JButton btnBrincar;
+    //Nome
     protected JLabel lblNome;
     private static final int TAMANHO_TXT = 16;
     protected JTextField nomeTextField;
@@ -29,17 +31,19 @@ public abstract class CriarCriancaPanel extends JPanel {
     }
 
     protected abstract void btnCriarCriancaCLick(ActionEvent event);
+    protected abstract void btnBrincarClick(ActionEvent event);
 
     private void eventos(){
         btnCriarCrianca.addActionListener(this::btnCriarCriancaCLick);
+        btnBrincar.addActionListener(this::btnBrincarClick);
     }
     private void inicializar(){
         this.setLayout(new BorderLayout());
-        this.add(this.CriarCriancaPanel(), BorderLayout.CENTER);
+        this.add(this.criarCriancaPanel(), BorderLayout.CENTER);
         this.add(this.getButtonPanel(), BorderLayout.PAGE_END);
 
     }
-    public JPanel CriarCriancaPanel() {
+    public JPanel criarCriancaPanel() {
         if (formPanel == null) {
             formPanel = new JPanel( new GridLayout(4, 2));
 
@@ -80,10 +84,12 @@ public abstract class CriarCriancaPanel extends JPanel {
 
             //Create the buttons
             btnCriarCrianca = new JButton("Criar Criança");
+            btnBrincar = new JButton("Brincar");
 
 
             //Add the buttons to the button panel
             buttonPanel.add(btnCriarCrianca);
+            buttonPanel.add(btnBrincar);
 
         }
         return buttonPanel;

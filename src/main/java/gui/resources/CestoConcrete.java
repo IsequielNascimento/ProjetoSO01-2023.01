@@ -13,14 +13,6 @@ public class CestoConcrete extends CestoForm{
             Cesto.cesto = new Semaphore(Cesto.K);
         }
 
-        @Override
-        public void btnBrincarCLick(ActionEvent event) {
-            // TODO Auto-generated method stub
 
-        }
 
-    @Override
-    protected void btnCestoCLick(ActionEvent event) {
-
-    }
 }
