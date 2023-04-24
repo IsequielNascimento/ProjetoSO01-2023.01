@@ -29,7 +29,11 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
     // define o tamanho da imagem
     int newWidth = 80;
     int newHeight = 80;
+    private ArrayList<Crianca> criancas = new ArrayList<>();
 
+    public void adicionarCrianca(Crianca crianca) {
+        criancas.add(crianca);
+    }
 
     public CriancaAnimacao() {
         // Carrega a imagem
@@ -54,11 +58,14 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
         Image bp = new ImageIcon("src/main/java/gui/resources/assets/quadra.jpg").getImage();
         g2d.drawImage(bp, 0, 0, getWidth(), getHeight(), null);
 
+        for (Crianca crianca : criancas) {
+            g2d.drawImage(image, x, y,newWidth,newHeight, null);
+        }
 
         g2d.drawImage(cestoImage, getWidth() / 2 -50, y, newWidth, newHeight, null);
 
         // Desenha a imagem na posição atual
-        g2d.drawImage(image, x, y,newWidth,newHeight, null);
+
     }
 
     @Override
@@ -110,11 +117,13 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
             @Override
             protected void btnCriarCriancaCLick(ActionEvent event) {
                 //Cria uma nova criança
-                Crianca crianca = new Crianca(nomeTextField.getText(), checkBoxBola.isSelected(), Integer.parseInt(textFieldTempoBrincadeira.getText()), Integer.parseInt(textFieldTempoQuieta.getText()));
+                //Crianca crianca = new Crianca(nomeTextField.getText(), checkBoxBola.isSelected(), Integer.parseInt(textFieldTempoBrincadeira.getText()), Integer.parseInt(textFieldTempoQuieta.getText()));
                 //Adiciona a criança na lista de crianças
-                criancas.add(crianca);
+                //criancas.add(crianca);
                 //Inicia a thread da criança
-                crianca.start();
+                Crianca novaCrianca = new Crianca(nomeTextField.getText(), checkBoxBola.isSelected(), Integer.parseInt(textFieldTempoBrincadeira.getText()), Integer.parseInt(textFieldTempoQuieta.getText()));
+                ((CriancaAnimacao)criancaAnimacao).adicionarCrianca(novaCrianca);
+                novaCrianca.start();
 
 
             }
@@ -137,4 +146,3 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
     }
 
 }
-

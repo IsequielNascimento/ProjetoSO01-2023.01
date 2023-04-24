@@ -1,5 +1,7 @@
 package gui.resources.animacao;
 
+import threads.Crianca;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -64,6 +66,8 @@ public abstract class CriarCriancaPanel extends JPanel {
 
             formPanel.add(lblTempoQuieta);
             formPanel.add(textFieldTempoQuieta);
+
+
 
 
         }

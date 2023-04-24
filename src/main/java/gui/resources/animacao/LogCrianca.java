@@ -2,9 +2,11 @@ package gui.resources.animacao;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.PrintStream;
 
 public class LogCrianca extends JPanel {
     private JTextArea textArea;
+
 
     public LogCrianca() {
         setLayout(new BorderLayout());
@@ -17,8 +19,15 @@ public class LogCrianca extends JPanel {
 
         // Adiciona JScrollPane ao painel
         add(scrollPane, BorderLayout.CENTER);
+        // Cria um CustomOutputStream que escreve na JTextArea
+        CustomOutputStream outputStream = new CustomOutputStream(System.out, textArea);
 
+        // Redireciona a saída padrão e de erro para o CustomOutputStream
+        System.setOut(new PrintStream(outputStream, true));
+        System.setErr(new PrintStream(outputStream, true));
     }
+
+
 
     public void log(String mensagem) {
         // Adiciona mensagem ao JTextArea

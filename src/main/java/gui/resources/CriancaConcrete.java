@@ -1,5 +1,6 @@
 package gui.resources;
 import gui.resources.animacao.CriancaAnimacao;
+import threads.Cesto;
 import threads.Crianca;
 
 import java.awt.event.ActionEvent;
@@ -11,6 +12,9 @@ import java.util.List;
 public class CriancaConcrete extends CriancaForm{
 
     int interfaceCesto = 1;
+    public int criancaComBola = 1;
+    public int criancaSemBola = 2;
+    public int totalCriancas =0;
     int interfaceAnimacao = 1;
     // Lista de crianças que será usada para iniciar a brincadeira
     public List<Crianca> criancas = new ArrayList<Crianca>();
@@ -22,7 +26,14 @@ public class CriancaConcrete extends CriancaForm{
     public void btnCriarCriancaCLick(ActionEvent event) {
 
        criancas.add(new Crianca(nomeTextField.getText(), checkBoxBola.isSelected(), Integer.parseInt(textFieldTempoBrincadeira.getText()), Integer.parseInt(textFieldTempoQuieta.getText())));
-
+       if (checkBoxBola.isSelected()) {
+           criancaComBola++;
+           totalCriancas++;
+       }
+       else {
+           criancaSemBola++;
+           totalCriancas++;
+       }
         System.out.println("Criança criada");
         System.out.println("Nome: " + nomeTextField.getText());
         System.out.println("Tem bola? " + checkBoxBola.isSelected());
@@ -49,7 +60,7 @@ public class CriancaConcrete extends CriancaForm{
     @Override
     protected void btnBrincarCLick(ActionEvent event) {
         if (interfaceAnimacao == 1){
-            new CriancaAnimacao();
+          new CriancaAnimacao();
             interfaceAnimacao --;
 
             // Inicia a brincadeira das crianças
@@ -65,8 +76,12 @@ public class CriancaConcrete extends CriancaForm{
         else {
             System.out.println("Brincando");
         }
-
-
+        if (Cesto.K == 0){
+            System.out.println("Não foi definido a capacidade do cesto");
+        }
+        else {
+            System.out.println("A capacidade do cesto é de: " + Cesto.K);
+        }
 
 
     }

@@ -14,10 +14,11 @@ public class Crianca extends Thread {
 
 
     public static List<Crianca> criancas;
+
     private String nome;
-    private boolean temBola;
+    public static boolean temBola;
     private int tempoBrincadeira; //tb
-    private int tempoQuieta; //tq
+    public static int tempoQuieta; //tq
     // public static int totalCrianca = 0;
     private long time = System.currentTimeMillis();
 
@@ -26,8 +27,8 @@ public class Crianca extends Thread {
     public Crianca(String nome, boolean temBola, int tempoBrincadeira, int tempoQuieta){
         this.nome = nome;
         this.temBola = temBola;
-        this.tempoBrincadeira = tempoBrincadeira;
-        this.tempoQuieta = tempoQuieta;
+        this.tempoBrincadeira = tempoBrincadeira*1000;
+        this.tempoQuieta = tempoQuieta*1000;
 
     }
 
@@ -60,14 +61,18 @@ public class Crianca extends Thread {
         Thread.sleep(tempoBrincadeira);
     }
 
-    private void descansar() throws InterruptedException{
+   /* private void descansar() throws InterruptedException{
         if (temBola == false) {
 
             time = System.currentTimeMillis();
             System.out.println("A " + nome + " está descansando");
 
         }
-    }
+    }*/
+   private void descansar() throws InterruptedException{
+       System.out.println("A " + nome + " está quieta");
+       Thread.sleep(tempoQuieta);
+   }
 
     private void esperarBola() throws InterruptedException{
         // Esperar para pegar a bola do cesto
@@ -85,7 +90,7 @@ public class Crianca extends Thread {
             cesto.acquire();
         System.out.println("Criança " + nome + " pegou a bola do cesto");
         temBola = true;
-        System.out.println("Criança " + nome + " ficou quieta por " + (time - System.currentTimeMillis()) + " segundos");
+
        }
     }
 
