@@ -16,7 +16,6 @@ import static threads.Crianca.*;
 public class CriancaAnimacao extends JPanel implements ActionListener {
 
     public static Timer timer;
-    protected JFrame frame;
 
     private static int numCrianca = 1;
     public int brincar = 0;
@@ -24,10 +23,11 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
     private int y = 400;
     private int panelY = 150;
     private int deltaX = 5;
+    public int i = 0;
 
     private int panelWidth;
     private int panelHeight;
-    private static Image image;
+    private static Image imageCrianca;
 
 
     private Image cestoImage;
@@ -40,17 +40,14 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
 
     public void adicionarCrianca(Crianca crianca) {
         criancas.add(crianca);
-        if (numCrianca == 3) {
-            numCrianca--;
-        } else
-            numCrianca++;
+
     }
 
     public CriancaAnimacao() {
         // Carrega a imagem
+        cestoImage = new ImageIcon("src/main/java/gui/resources/assets/cesto/cesto5.png").getImage();
 
-            image = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca" + numCrianca + "LadoD1.png").getImage();
-            cestoImage = new ImageIcon("src/main/java/gui/resources/assets/cesto/cesto5.png").getImage();
+            imageCrianca = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca" + numCrianca + "LadoD1.png").getImage();
         // Configura o temporizador para atualizar a posição da imagem
 
 
@@ -69,14 +66,15 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
         Image bp = new ImageIcon("src/main/java/gui/resources/assets/quadra.jpg").getImage();
         g2d.drawImage(bp, 0, 0, getWidth(), getHeight(), null);
 
+        g2d.drawImage(cestoImage, getWidth() / 2 - 50, y, newWidth, newHeight, null);
         for (Crianca crianca : criancas) {
-            for (int i = 0; i < criancas.size(); i++) {
+            for ( i = 0; i < criancas.size(); i++) {
 
-                    g2d.drawImage(image, x + (i * 40), y, newWidth, newHeight, null);
+                    g2d.drawImage(imageCrianca, x + (i *25), y, newWidth, newHeight, null);
             }
         }
 
-        g2d.drawImage(cestoImage, getWidth() / 2 - 50, y, newWidth, newHeight, null);
+
 
         // Desenha a imagem na posição atual
 
@@ -86,23 +84,43 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Atualiza a posição da imagem
         x += deltaX;
+if(temBola) {
+    // Verifica se a imagem ultrapassou o limite direito do painel
+    if (x + imageCrianca.getWidth(null) > getWidth() - (45 * i)) {
+        // Inverte a direção do movimento da imagem
+        deltaX = -deltaX;
+        imageCrianca = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca" + numCrianca + "LadoE1.png").getImage();
+        // Reposiciona a imagem para o meio do painel
+        x = (getWidth() - (45 * i)) - imageCrianca.getWidth(null);
+    }
 
-        // Verifica se a imagem ultrapassou o limite direito do painel
-        if (x + image.getWidth(null) > getWidth() / 2 -50) {
-            // Inverte a direção do movimento da imagem
-            deltaX = -deltaX;
-            image = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca"+numCrianca+"LadoE1.png").getImage();
-            // Reposiciona a imagem para o meio do painel
-            x = (getWidth() / 2 -50) - image.getWidth(null);
-        }
+    // Verifica se a imagem ultrapassou o limite esquerdo do painel
+    if (x < 100 + (25 * i)) {
+        // Inverte a direção do movimento da imagem
+        deltaX = -deltaX;
+        imageCrianca = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca" + numCrianca + "LadoD1.png").getImage();
+        // Reposiciona a imagem para a borda esquerda do painel
+        x = 100 + (25 * i);
+    }
+}
+else {
+    // Verifica se a imagem ultrapassou o limite direito do painel
+    if (x + imageCrianca.getWidth(null) > getWidth() - (45 * i)) {
+        // Inverte a direção do movimento da imagem
+        deltaX = -deltaX;
+        imageCrianca = new ImageIcon("src/main/java/gui/resources/assets//criancaSemBola/crianca" + numCrianca + "LadoE1.png").getImage();
+        // Reposiciona a imagem para o meio do painel
+        x = (getWidth() - (45 * i)) - imageCrianca.getWidth(null);
+    }
 
-        // Verifica se a imagem ultrapassou o limite esquerdo do painel
-        if (x < 100) {
-            // Inverte a direção do movimento da imagem
-            deltaX = -deltaX;
-            image = new ImageIcon("src/main/java/gui/resources/assets//criancaComBola/crianca"+numCrianca+"LadoD1.png").getImage();
-            // Reposiciona a imagem para a borda esquerda do painel
-            x = 100;
+    // Verifica se a imagem ultrapassou o limite esquerdo do painel
+    if (x < 100 + (25 * i)) {
+        // Inverte a direção do movimento da imagem
+        deltaX = -deltaX;
+        imageCrianca = new ImageIcon("src/main/java/gui/resources/assets//criancaSemBola/crianca" + numCrianca + "LadoD1.png").getImage();
+        // Reposiciona a imagem para a borda esquerda do painel
+        x = 100 + (25 * i);
+    }
         }
 
         // Redesenha o painel com a nova posição da imagem

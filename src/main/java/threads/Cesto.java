@@ -6,7 +6,7 @@ public class Cesto{
 
     public static int K;
     public static Semaphore bolas = new Semaphore(0);
-    public static Semaphore cesto = new Semaphore(2);
+    public static Semaphore cesto = new Semaphore(K);
     public Cesto(){
         this.cesto = cesto;
         this.bolas = bolas;

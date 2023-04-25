@@ -25,6 +25,8 @@ public abstract class CriarCriancaPanel extends JPanel {
     protected JLabel lblTempoQuieta;
     protected JTextField textFieldTempoQuieta;
 
+
+
     public CriarCriancaPanel(){
         this.inicializar();
         this.eventos();
@@ -58,6 +60,7 @@ public abstract class CriarCriancaPanel extends JPanel {
 
             lblTempoQuieta = new JLabel("Tempo de Quieta");
             textFieldTempoQuieta = new JTextField(TAMANHO_TXT);
+
 
             formPanel.add(lblNome);
             formPanel.add(nomeTextField);

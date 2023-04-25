@@ -2,7 +2,6 @@
 
 package threads;
 import gui.resources.CestoForm;
-import gui.resources.CriancaConcrete;
 import gui.resources.animacao.CriancaAnimacao;
 import gui.resources.animacao.CriarCriancaPanel;
 import gui.resources.animacao.LogCrianca;
@@ -28,6 +27,7 @@ public class Crianca extends Thread {
     public static boolean temBola;
     public static int tempoBrincadeira; //tb
     public static int tempoQuieta; //tq
+    public static Image imageCrianca;
     // public static int totalCrianca = 0;
     private long time = System.currentTimeMillis();
 
@@ -38,6 +38,7 @@ public class Crianca extends Thread {
         this.temBola = temBola;
         this.tempoBrincadeira = tempoBrincadeira * 1000;
         this.tempoQuieta = tempoQuieta * 1000;
+
 
     }
 
@@ -83,23 +84,23 @@ public class Crianca extends Thread {
 
     private void esperarBola() throws InterruptedException {
         // Esperar para pegar a bola do cesto
-        if (bolas.availablePermits() == 0) {
-            System.out.println("Criança " + nome + " está esperando para pegar a bola do cesto");
-        } else {
+
             bolas.acquire();
-        }
+
     }
 
     private void pegarBola() throws InterruptedException {
-        if (cesto.availablePermits() == 0) {
-            System.out.println("Criança " + nome + " está esperando para pegar a bola do cesto");
-        } else {
 
+        if(cesto.availablePermits() == 0) {
+            System.out.println("Cesto está Vazio");
+        }
+        else {
             cesto.acquire();
             System.out.println("Criança " + nome + " pegou a bola do cesto");
             temBola = true;
-
         }
+
+
     }
 
 
@@ -140,22 +141,17 @@ public class Crianca extends Thread {
             //Funcionalidade do botão Criar Criança
             @Override
             protected void btnCriarCriancaCLick(ActionEvent event) {
-                //Cria uma nova criança
-                //Crianca crianca = new Crianca(nomeTextField.getText(), checkBoxBola.isSelected(), Integer.parseInt(textFieldTempoBrincadeira.getText()), Integer.parseInt(textFieldTempoQuieta.getText()));
-                //Adiciona a criança na lista de crianças
-                //criancas.add(crianca);
+
                 //Inicia a thread da criança
 
-                    Crianca novaCrianca = new Crianca(nomeTextField.getText(), checkBoxBola.isSelected(), Integer.parseInt(textFieldTempoBrincadeira.getText()), Integer.parseInt(textFieldTempoQuieta.getText()));
+                Crianca novaCrianca = new Crianca(nomeTextField.getText(), checkBoxBola.isSelected(), Integer.parseInt(textFieldTempoBrincadeira.getText()), Integer.parseInt(textFieldTempoQuieta.getText()));
 
                 criancas.add(novaCrianca);
                     System.out.println(criancas.size());
-                    System.out.println("Criança criada com sucesso!");
+                    System.out.println("Criança "+nomeTextField.getText()+" com sucesso!");
 
-                if (numCrianca == 2) {
-                    numCrianca--;
-                } else {
-                    numCrianca++;
+                if (numCrianca >= 1) {
+                   novaCrianca.start();
                 }
 
 
@@ -174,6 +170,7 @@ public class Crianca extends Thread {
                     for (int i = 0; i < Crianca.criancas.size(); i++) {
                         ((CriancaAnimacao) criancaAnimacao).adicionarCrianca(Crianca.criancas.get(i));
                     }
+                    numCrianca = 1;
 
 
                 }
