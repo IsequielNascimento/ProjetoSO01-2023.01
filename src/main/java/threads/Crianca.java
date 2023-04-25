@@ -1,11 +1,11 @@
 //A classe Crianca. Java é a classe principal de controle das crianças que irão brincar com a bola
 
 package threads;
-import gui.resources.CestoForm;
+
 import gui.resources.animacao.CriancaAnimacao;
 import gui.resources.animacao.CriarCriancaPanel;
 import gui.resources.animacao.LogCrianca;
-
+import gui.resources.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;

@@ -51,7 +51,7 @@ public class CriancaAnimacao extends JPanel implements ActionListener {
         // Configura o temporizador para atualizar a posição da imagem
 
 
-        timer = new Timer(25, this);
+        timer = new Timer(10, this);
         timer.start();
     }
 
