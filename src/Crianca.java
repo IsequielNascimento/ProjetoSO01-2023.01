@@ -52,7 +52,7 @@ public class Crianca extends Thread {
                 try {
                     System.out.println(this.getNome() + " está tentando pegar a bola no cesto...");
                     changeIcon(ChildState.ESPERANDO);
-                    JLabelWrapper.childTime.setText("Esperando pela bola");
+                    JLabelWrapper.childTime.setText("Esperando aparecer bola no cesto");
                     cheio.acquire();
                     // Mostrar quantidade de bola nos cestos
 
@@ -79,8 +79,8 @@ public class Crianca extends Thread {
             long upTimerReset = System.currentTimeMillis();
             int upTimerLimit = 150;
             while (tempo < tempoBrincando) {
-                String k = Integer.toString(Integer.parseInt(String.valueOf(tempo2 /1000)));
-                JLabelWrapper.childTime.setText("Tempo de brincadeira: " + k + "s");
+                String brincadeiraTime = Integer.toString(Integer.parseInt(String.valueOf(tempo2 /1000)));
+                JLabelWrapper.childTime.setText("Tempo da brincadeira: " + brincadeiraTime + "s");
                 if (upTimer >= upTimerLimit) {
                     if (flag) {
                         changeIcon(ChildState.BRINCANDO_1);
@@ -99,7 +99,7 @@ public class Crianca extends Thread {
 
             }
 
-            System.out.println(this.getNome() + " terminou de brincar: " + tempo);
+            System.out.println(this.getNome() + " terminou de brincar: " + tempo/1000 + " se passaram");
 
             try {
                 changeIcon(ChildState.CESTO_CHEIO);
@@ -122,7 +122,7 @@ public class Crianca extends Thread {
             tempo = 0;
             tempo2 = tempoQuieta;
 
-            System.out.println(this.getNome() + " está descansando: " + tempo);
+            System.out.println(this.getNome() + " está descansando " );
 
 
             boolean quietFlag = false;
@@ -131,8 +131,8 @@ public class Crianca extends Thread {
             long quietTimerReset = System.currentTimeMillis();
             int quietTimerLimit = 150;
             while (tempo < tempoQuieta) {
-                String k = Integer.toString(Integer.parseInt(String.valueOf(tempo2 /1000)));
-                JLabelWrapper.childTime.setText("TQuieta: " + k + "s");
+                String quietaTempo = Integer.toString(Integer.parseInt(String.valueOf(tempo2 /1000)));
+                JLabelWrapper.childTime.setText("Tempo quieta: " + quietaTempo + "s");
 
                 if (quietTimer >= quietTimerLimit) {
                     if (quietFlag) {
@@ -152,7 +152,7 @@ public class Crianca extends Thread {
 
             }
 
-            System.out.println(this.getNome() + " terminou de descansar: " + (tempo/2));
+            System.out.println(this.getNome() + " terminou de descansar: " + (tempo/1000));
         }
     }
 
@@ -167,7 +167,7 @@ public class Crianca extends Thread {
         URL imageChildURL;
         switch (state) {
             case ESPERANDO:
-                imageChildURL = Main.class.getResource("/image/sem_bola.png");
+                imageChildURL = Main.class.getResource("/image/sem_Bola.png");
                 break;
             case CESTO_CHEIO:
                 imageChildURL = Main.class.getResource("/image/cesto_cheio.png");

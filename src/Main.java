@@ -117,13 +117,13 @@ class Main {
                 Dimension size = childLabel.getPreferredSize();
 
                 // SETA A POSIÇÃO DOS COMPONENTES NA JANELA DE ACORDO COM A QUANTIDADE DE CRIANÇAS
-                childLabel.setBounds(childSpacer.spacer, 370, size.width, size.height);
-                childName.setBounds(childSpacer.spacer + 350, 150, size.width, size.height);
-                childTime.setBounds(childSpacer.spacer + 350, 170, size.width, size.height);
+                childLabel.setBounds(childSpacer.spacer-150, 450, size.width, size.height);
+                childName.setBounds(childSpacer.spacer , 150, size.width, size.height);
+                childTime.setBounds(childSpacer.spacer , 170, size.width, size.height);
 
 
                 // SETA A POSIÇÃO DOS COMPONENTES NA JANELA DE ACORDO COM A QUANTIDADE DE CRIANÇAS
-                childSpacer.spacer = childSpacer.spacer + 250;
+                childSpacer.spacer = childSpacer.spacer + 145;
 
                 // ADICIONA OS COMPONENTES NA JANELA
                 panelAplicacao.add(childLabel);
